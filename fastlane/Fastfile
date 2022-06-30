@@ -50,8 +50,8 @@ platform :android do
                 gradle_file: "./android/app/build.gradle",
             )
             android_set_version_name(
-                version_name: tag
-                gradle_file: "./android/app/build.gradle",
+                version_name: tag,
+                gradle_file: "./android/app/build.gradle"
             )
 
         end
