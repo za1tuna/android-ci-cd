@@ -33,7 +33,7 @@ platform :android do
         next_version = lane_context[SharedValues::RELEASE_NEXT_VERSION]
 
         # Create tag to recognize future "last version" (the current version)
-        add_git_tag(tag: "#{next_version}-#{ENV["FLAVOR_TYPE"]}")
+        add_git_tag(tag: "v#{next_version}-#{ENV["FLAVOR_TYPE"]}")
         push_git_tags(remote: "#{ENV["GIT_REMOTE"]}")
     end
 

@@ -46,6 +46,8 @@ jobs:
           restore-keys: |
               ${{ runner.os }}-gradle-
       - run: |
+              echo ::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}
+              echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
               echo $KEYSTORE | base64 -d -i > /tmp/my-release-key.keystore
               echo $SA_JSON_KEY | base64 -d -i > key_firebase.json
               echo $GOOGLE_SERVICES_JSON | base64 -d -i > app/google-services.json
