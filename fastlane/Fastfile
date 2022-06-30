@@ -28,6 +28,15 @@ platform :android do
         )
     end
 
+    desc "Generates release notes for slack and create the next tag"
+    lane :post_deploy do
+        next_version = lane_context[SharedValues::RELEASE_NEXT_VERSION]
+
+        # Create tag to recognize future "last version" (the current version)
+        add_git_tag(tag: "#{next_version}-#{ENV["FLAVOR_TYPE"]}")
+        push_git_tags(remote: "#{ENV["GIT_REMOTE"]}")
+    end
+
     desc "Build android"
     lane :build_release do |options|
         semver = ENV["SEMVER"]
@@ -37,16 +46,13 @@ platform :android do
             tag = "#{lane_context[SharedValues::RELEASE_NEXT_VERSION]}-#{ENV["FLAVOR_TYPE"]}"
             puts "RELEASE_NEXT_VERSION #{lane_context[SharedValues::RELEASE_NEXT_VERSION]}-#{ENV["FLAVOR_TYPE"]}"
 
-            private_lane :inc_ver_and do
-                increment_version_code(
-                    gradle_file_path: "./android/app/build.gradle",
-                )
-          
-                increment_version_name(
-                    gradle_file_path: "./android/app/build.gradle",
-                    version_name: tag
-                )
-            end
+            increment_version_code(
+                gradle_file_path: "./android/app/build.gradle",
+            )
+            increment_version_name(
+                gradle_file_path: "./android/app/build.gradle",
+                version_name: tag
+            )
 
         end
         build_android_app(
@@ -99,6 +105,9 @@ platform :android do
                 debug: true,
             )
             success("Firebase")
+
+            post_deploy()
+
         rescue  => exception
             on_error(exception)
             UI.user_error!(exception)

@@ -24,6 +24,7 @@ env:
   BUILD_TYPE: "debug"
   SEMVER: "true"
   FLAVOR_TYPE: "beta"
+  GIT_REMOTE: "https://${{ secrets.BASEAUTH }}@github.com:maddevsio/android-ci-cd.git"
 
 jobs:
   staging_firebase:
