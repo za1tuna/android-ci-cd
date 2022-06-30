@@ -2,6 +2,5 @@
 #
 # Ensure this file is checked in to source control!
 gem 'fastlane-plugin-firebase_app_distribution'
-gem 'fastlane-plugin-firebase_increment_version_name'
-gem 'fastlane-plugin-firebase_increment_version_code'
+gem 'fastlane-plugin-android_versioning
 gem 'fastlane-plugin-semantic_release'
