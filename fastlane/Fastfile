@@ -46,12 +46,12 @@ platform :android do
             tag = "#{lane_context[SharedValues::RELEASE_NEXT_VERSION]}-#{ENV["FLAVOR_TYPE"]}"
             puts "RELEASE_NEXT_VERSION #{lane_context[SharedValues::RELEASE_NEXT_VERSION]}-#{ENV["FLAVOR_TYPE"]}"
 
-            increment_version_code(
-                gradle_file_path: "./android/app/build.gradle",
+            android_set_version_code(
+                gradle_file: "./android/app/build.gradle",
             )
-            increment_version_name(
-                gradle_file_path: "./android/app/build.gradle",
+            android_set_version_name(
                 version_name: tag
+                gradle_file: "./android/app/build.gradle",
             )
 
         end
