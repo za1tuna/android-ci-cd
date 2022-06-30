@@ -3,7 +3,7 @@ name: 'staging'
 on:
   workflow_run:
     workflows: ['lint and tests']
-    branches: [main]
+    branches: [main, feature/semantic-versioning]
     types:
       - completed
   workflow_dispatch:
@@ -22,6 +22,8 @@ env:
   CI_COMMIT_BEFORE_SHA: ${{ github.event.before }}
   BUILD_TASK: "assemble"
   BUILD_TYPE: "debug"
+  SEMVER: "true"
+  FLAVOR_TYPE: "beta"
 
 jobs:
   staging_firebase:
