@@ -21,7 +21,7 @@ RUN yes | ./android-sdk-linux/cmdline-tools/bin/sdkmanager "build-tools;${ANDROI
 COPY Gemfile .
 RUN gem install bundler
 RUN bundle install
-RUN gem install fastlane-plugin-firebase_app_distribution fastlane-plugin-android_versioning fastlane-plugin-semantic_release
+RUN gem install fastlane-plugin-firebase_app_distribution fastlane-plugin-versioning_android fastlane-plugin-semantic_release
 #clean cache
 RUN apt-get clean autoclean
 RUN apt-get autoremove --yes
